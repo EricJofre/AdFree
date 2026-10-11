@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AdFree Pro - Opciones</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AdFree Pro</h1>
+      <p>Bloqueador de anuncios con funciones premium gratis.</p>
+    </header>
+
+    <section>
+      <h2>Funciones premium</h2>
+      <div class="switches">
+        <label class="row">
+          <span>Mejorar experiencia en YouTube</span>
+          <input type="checkbox" id="yt-toggle">
+        </label>
+        <label class="row">
+          <span>Bloquear avisos de cookies</span>
+          <input type="checkbox" id="cookie-toggle">
+        </label>
+        <label class="row">
+          <span>Ocultar popups, videos flotantes y registros</span>
+          <input type="checkbox" id="popup-toggle">
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tus reglas de bloqueo</h2>
+      <p>Reglas de red (una por línea). Soporta <code>||dominio.com^</code>, <code>dominio.com</code> o patrones con <code>*</code>.</p>
+      <textarea id="network-filters" rows="8" placeholder="||ads.ejemplo.com^"></textarea>
+
+      <p>Reglas cosméticas (una por línea). Ejemplo: <code>##.banner-ads</code></p>
+      <textarea id="cosmetic-filters" rows="8" placeholder="##.ad-slot"></textarea>
+
+      <button id="save-btn" class="primary">Guardar cambios</button>
+      <div id="status"></div>
+    </section>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

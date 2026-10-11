@@ -1,0 +1,17 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { width: 280px; padding: 16px; background: #f8f9fa; color: #1a1a1a; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.logo { font-size: 20px; font-weight: 800; color: #e63022; }
+.version { font-size: 11px; color: #666; text-transform: uppercase; }
+.stats { background: #fff; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+.stats span { display: block; font-size: 36px; font-weight: 700; color: #e63022; }
+.stats small { color: #666; font-size: 12px; }
+.switch-row { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); font-weight: 600; }
+.toggle { position: relative; width: 44px; height: 24px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 24px; transition: .2s; }
+.slider::before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .2s; }
+input:checked + .slider { background: #00c853; }
+input:checked + .slider::before { transform: translateX(20px); }
+.actions button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #e63022; color: #fff; font-weight: 700; cursor: pointer; }
+.actions button:hover { background: #c21a0d; }
