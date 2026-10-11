@@ -145,7 +145,12 @@
   }
 
   function isYouTube() {
-    return HOST === 'www.youtube.com' || HOST === 'youtube.com' || HOST === 'm.youtube.com';
+    return HOST === 'www.youtube.com' ||
+           HOST === 'youtube.com' ||
+           HOST === 'm.youtube.com' ||
+           HOST === 'music.youtube.com' ||
+           HOST === 'www.youtube-nocookie.com' ||
+           HOST === 'youtube-nocookie.com';
   }
 
   function handleYouTubeAds() {

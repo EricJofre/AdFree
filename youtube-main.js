@@ -4,9 +4,18 @@
   const cleanPlayerResponse = (obj) => {
     if (!obj || typeof obj !== 'object') return obj;
 
-    if (Array.isArray(obj.adPlacements)) obj.adPlacements = [];
-    if (Array.isArray(obj.playerAds)) obj.playerAds = [];
-    if (obj.adSignalsInfo) obj.adSignalsInfo = {};
+    const adKeys = [
+      'adPlacements', 'playerAds', 'adBreaks', 'adSlots', 'adCuePoints',
+      'adSignalsInfo', 'adServingData', 'adsContext', 'adState', 'adTagUri', 'adSafetyFlags'
+    ];
+    for (const key of adKeys) {
+      if (key in obj) {
+        if (Array.isArray(obj[key])) obj[key] = [];
+        else if (typeof obj[key] === 'object' && obj[key] !== null) obj[key] = {};
+        else obj[key] = null;
+      }
+    }
+
     if (obj.playerConfig && obj.playerConfig.audioAdsConfig) {
       obj.playerConfig.audioAdsConfig = {};
     }
@@ -37,7 +46,10 @@
   window.fetch = async function(...args) {
     const response = await originalFetch.apply(this, args);
     const url = args[0];
-    if (typeof url !== 'string' || !url.includes('/youtubei/v1/player')) {
+    if (typeof url !== 'string' ||
+        (!url.includes('/youtubei/v1/player') &&
+         !url.includes('/youtubei/v1/next') &&
+         !url.includes('/get_video_info'))) {
       return response;
     }
 
