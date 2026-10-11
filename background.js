@@ -24,6 +24,22 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   } catch (e) {
     console.warn('Badge count not supported', e);
   }
+
+  try {
+    await chrome.scripting.unregisterContentScripts({ ids: ['youtube-main-world'] });
+  } catch (e) {}
+  try {
+    await chrome.scripting.registerContentScripts([{
+      id: 'youtube-main-world',
+      matches: ['*://*.youtube.com/*', '*://*.youtube-nocookie.com/*', '*://music.youtube.com/*'],
+      js: ['youtube-main.js'],
+      runAt: 'document_start',
+      allFrames: true,
+      world: 'MAIN'
+    }]);
+  } catch (e) {
+    console.warn('Main world script registration failed', e);
+  }
 });
 
 async function setMasterEnabled(enabled) {
