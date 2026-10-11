@@ -10,12 +10,36 @@ Bloqueador de anuncios con funciones "premium" implementadas gratis, usando la A
 - Bloqueo de avisos de cookies.
 - Ocultar popups, videos flotantes y formularios de registro.
 
-## Cargar en Chrome
+## Cómo instalar en Chrome
 
-1. Abre `chrome://extensions/`.
-2. Activa **Modo desarrollador** (arriba a la derecha).
-3. Haz clic en **Cargar descomprimida**.
-4. Selecciona la carpeta `adfree-pro`.
+### 1. Descargar el código
+
+- **Con Git** (recomendado):
+  ```bash
+  git clone https://github.com/EricJofre/AdFree.git
+  cd AdFree
+  ```
+- **Sin Git**: ve a [https://github.com/EricJofre/AdFree](https://github.com/EricJofre/AdFree), haz clic en **Code > Download ZIP** y descomprime el archivo.
+
+### 2. Abrir Chrome en modo desarrollador
+
+1. Escribe `chrome://extensions/` en la barra de direcciones y presiona Enter.
+2. Activa el interruptor **Modo desarrollador** (arriba a la derecha).
+
+### 3. Cargar la extensión
+
+1. Haz clic en el botón **Cargar descomprimida**.
+2. Selecciona la carpeta `adfree-pro` (la que contiene `manifest.json`).
+3. Chrome instalará la extensión y aparecerá el icono en la barra de herramientas.
+
+### 4. Fijarla (opcional)
+
+1. Haz clic en el icono de extensiones (🧩) en Chrome.
+2. Junto a **AdFree Pro**, haz clic en el pin 📌 para fijarla.
+
+### 5. Configurar
+
+Haz clic derecho en el icono y selecciona **Opciones** para activar/desactivar funciones o añadir reglas personalizadas.
 
 ## Iconos (opcional)
 
