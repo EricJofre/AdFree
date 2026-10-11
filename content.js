@@ -121,6 +121,7 @@
 
     if (settings.features?.youtube && isYouTube()) {
       parts.push(`${YT_SELECTORS.join(',')} { display: none !important; }`);
+      parts.push('.html5-video-player.ad-showing video { visibility: hidden !important; }');
     }
     if (settings.features?.cookies) {
       parts.push(`${COOKIE_SELECTORS.join(',')} { display: none !important; }`);
