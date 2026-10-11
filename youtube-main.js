@@ -68,4 +68,36 @@
       return response;
     }
   };
+
+  // Fallback en vivo: silenciar y acelerar cualquier anuncio que logre iniciar
+  let adActive = false;
+  let prevMuted = false;
+  let prevRate = 1;
+
+  const skipLiveAd = () => {
+    const player = document.querySelector('.html5-video-player');
+    const video = document.querySelector('video');
+    if (!player || !video) return;
+
+    const isAd = player.classList.contains('ad-showing') || player.classList.contains('ad-interrupting');
+    if (isAd) {
+      if (!adActive) {
+        adActive = true;
+        prevMuted = video.muted;
+        prevRate = video.playbackRate;
+      }
+      video.muted = true;
+      try { video.playbackRate = 16; } catch (e) {}
+      const skipBtn = document.querySelector('.ytp-skip-ad-button, .ytp-ad-skip-button-modern, .ytp-skip-ad-button');
+      if (skipBtn) skipBtn.click();
+    } else if (adActive) {
+      adActive = false;
+      video.muted = prevMuted;
+      try { video.playbackRate = prevRate; } catch (e) {}
+    }
+  };
+
+  const mo = new MutationObserver(skipLiveAd);
+  mo.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+  setInterval(skipLiveAd, 100);
 })();

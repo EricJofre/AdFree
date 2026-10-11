@@ -215,9 +215,7 @@
     const css = buildCSS(settings, customFilters.cosmetic || []);
     injectCSS(css);
 
-    if (enabled && features.youtube && isYouTube()) {
-      startYouTubeObserver();
-    } else {
+    if (!(enabled && features.youtube && isYouTube())) {
       stopYouTubeObserver();
     }
   }
