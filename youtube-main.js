@@ -100,4 +100,40 @@
   const mo = new MutationObserver(skipLiveAd);
   mo.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
   setInterval(skipLiveAd, 100);
+
+  // Impide que el reproductor desmute o suba el volumen durante un anuncio
+  const enforceAdMute = () => {
+    const muteDesc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'muted');
+    if (muteDesc && muteDesc.set) {
+      const origSet = muteDesc.set;
+      Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
+        set: function(v) {
+          const player = this.closest ? this.closest('.html5-video-player') : null;
+          if (player && (player.classList.contains('ad-showing') || player.classList.contains('ad-interrupting'))) {
+            v = true;
+          }
+          origSet.call(this, v);
+        },
+        get: muteDesc.get,
+        configurable: true
+      });
+    }
+
+    const volDesc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'volume');
+    if (volDesc && volDesc.set) {
+      const origSet = volDesc.set;
+      Object.defineProperty(HTMLMediaElement.prototype, 'volume', {
+        set: function(v) {
+          const player = this.closest ? this.closest('.html5-video-player') : null;
+          if (player && (player.classList.contains('ad-showing') || player.classList.contains('ad-interrupting'))) {
+            v = 0;
+          }
+          origSet.call(this, v);
+        },
+        get: volDesc.get,
+        configurable: true
+      });
+    }
+  };
+  enforceAdMute();
 })();
